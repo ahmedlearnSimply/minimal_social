@@ -18,6 +18,7 @@ class CustomTextFormField extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return TextFormField(
+      cursorColor: Colors.black,
       obscureText: obscure,
       controller: controller,
       decoration: InputDecoration(
@@ -34,16 +35,15 @@ class CustomTextFormField extends StatelessWidget {
           borderRadius: BorderRadius.circular(12.0), // Rounded corners
 
           // Border when not focused
-          borderSide: BorderSide.none,
         ),
         focusedBorder: OutlineInputBorder(
           borderRadius: BorderRadius.circular(12.0), // Rounded corners
 
           // Border when focused
-          borderSide: BorderSide(color: Colors.grey, width: 2.0),
+          borderSide: BorderSide(color: Colors.black, width: 2.0),
         ),
-        fillColor: Colors.grey[200], // Background color
-        filled: true, // Enable the fill color
+        fillColor: null, // Background color
+        filled: true,
         contentPadding: const EdgeInsets.symmetric(
             vertical: 20.0, horizontal: 16.0), // Padding inside the field
       ),

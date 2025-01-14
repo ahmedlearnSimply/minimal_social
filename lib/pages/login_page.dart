@@ -74,7 +74,33 @@ class LoginPage extends StatelessWidget {
               CustomButton(
                 onTap: onTap,
                 text: "Login",
-              )
+              ),
+              Gap(15),
+              //* Don't have an account?
+              Row(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  Text(
+                    "Don't have an account?",
+                    style: TextStyle(
+                      fontSize: 16,
+                    ),
+                  ),
+                  Gap(5),
+                  GestureDetector(
+                    onTap: () {
+                      // Navigate to forgot password page
+                    },
+                    child: Text(
+                      "Register Here",
+                      style: TextStyle(
+                        fontSize: 16,
+                        fontWeight: FontWeight.bold,
+                      ),
+                    ),
+                  )
+                ],
+              ),
             ],
           ),
         ),
