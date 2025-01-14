@@ -1,16 +1,16 @@
-// ignore_for_file: prefer_const_constructors, prefer_const_literals_to_create_immutables
+// ignore_for_file: prefer_const_constructors, prefer_const_literals_to_create_immutables, must_be_immutable
 
 import 'package:flutter/material.dart';
 
 class CustomTextFormField extends StatelessWidget {
+  final bool obscure;
   final String labelText;
   Icon prefixIcon;
-  Icon suffixIcon;
   TextEditingController controller;
   CustomTextFormField({
+    required this.obscure, // If the field should obscure the input
     required this.controller,
     required this.prefixIcon,
-    required this.suffixIcon,
     required this.labelText,
     super.key,
   });
@@ -18,12 +18,14 @@ class CustomTextFormField extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return TextFormField(
+      obscureText: obscure,
       controller: controller,
       decoration: InputDecoration(
         labelText: labelText,
-        labelStyle: TextStyle(color: Colors.black),
+        labelStyle: TextStyle(
+          color: Theme.of(context).colorScheme.inversePrimary,
+        ),
         prefixIcon: prefixIcon, // Icon at the start
-        suffixIcon: suffixIcon, // Icon at the end
         border: OutlineInputBorder(
           // Adds a border around the field
           borderRadius: BorderRadius.circular(12.0), // Rounded corners

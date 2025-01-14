@@ -5,10 +5,10 @@ import 'package:flutter/material.dart';
 class CustomButton extends StatelessWidget {
   //creat a method for ontap
   final VoidCallback onTap;
-  final Color color;
+  final Color? color;
   CustomButton({
     required this.onTap,
-    this.color = Colors.black,
+    this.color,
     this.text = "",
     super.key,
   });
@@ -22,7 +22,7 @@ class CustomButton extends StatelessWidget {
         child: Container(
           padding: EdgeInsets.all(10),
           decoration: BoxDecoration(
-            color: color ?? Colors.black,
+            color: color ?? Colors.grey[700],
             borderRadius: BorderRadius.circular(12),
             border: Border.all(color: Colors.white),
           ),
@@ -31,7 +31,6 @@ class CustomButton extends StatelessWidget {
               text,
               style: TextStyle(
                 fontSize: 28,
-                fontWeight: FontWeight.bold,
                 color: Colors.white,
               ),
             ),
