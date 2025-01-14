@@ -1,6 +1,7 @@
 // ignore_for_file: prefer_const_constructors
 
 import 'package:flutter/material.dart';
+import 'package:minimal_social/auth/login_or_register.dart';
 import 'package:minimal_social/pages/login_page.dart';
 import 'package:minimal_social/pages/register_page.dart';
 import 'package:minimal_social/theme/dark.dart';
@@ -18,7 +19,7 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
-      home: RegisterPage(),
+      home: LoginOrRegister(),
       theme: lightMode,
       darkTheme: darkMode,
     );

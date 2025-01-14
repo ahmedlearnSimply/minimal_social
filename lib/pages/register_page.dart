@@ -6,11 +6,12 @@ import 'package:minimal_social/components/custom_button.dart';
 import 'package:minimal_social/components/custom_text_form_field.dart';
 
 class RegisterPage extends StatelessWidget {
+  final void Function() onTap;
+
   RegisterPage({
+    required this.onTap,
     super.key,
   });
-
-  final void Function() onTap = () {};
 
   final usernameController = TextEditingController();
   final emailController = TextEditingController();
@@ -93,9 +94,7 @@ class RegisterPage extends StatelessWidget {
                     ),
                     Gap(5),
                     GestureDetector(
-                      onTap: () {
-                        // Navigate to forgot password page
-                      },
+                      onTap: onTap,
                       child: Text(
                         "Login Here",
                         style: TextStyle(
