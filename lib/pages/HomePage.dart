@@ -22,16 +22,6 @@ class HomePage extends StatelessWidget {
         ),
 
         //* Icon for log out
-        actions: [
-          IconButton(
-            icon: Icon(
-              Icons.exit_to_app,
-            ),
-            onPressed: () {
-              FirebaseAuth.instance.signOut();
-            },
-          ),
-        ],
       ),
       drawer: CustomDrawer(),
     );

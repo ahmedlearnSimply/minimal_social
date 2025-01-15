@@ -66,7 +66,6 @@ class CustomDrawer extends StatelessWidget {
                   title: const Text("H O M E"),
                   onTap: () {
                     // Navigate to the home screen
-
                     Navigator.pop(context); // Close the drawer
                   },
                 ),
@@ -79,6 +78,7 @@ class CustomDrawer extends StatelessWidget {
                   onTap: () {
                     // Navigate to the settings screen
                     Navigator.pop(context); // Close the drawer
+                    Navigator.pushNamed(context, '/profile');
                   },
                 ),
                 ListTile(
@@ -90,6 +90,7 @@ class CustomDrawer extends StatelessWidget {
                   onTap: () {
                     // Navigate to the help screen
                     Navigator.pop(context); // Close the drawer
+                    Navigator.pushNamed(context, '/users');
                   },
                 ),
                 const Divider(), // Add a divider
