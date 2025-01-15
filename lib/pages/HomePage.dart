@@ -3,6 +3,7 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
+import 'package:minimal_social/components/custom_drawer.dart';
 
 class HomePage extends StatelessWidget {
   const HomePage({super.key});
@@ -13,10 +14,14 @@ class HomePage extends StatelessWidget {
       appBar: AppBar(
         centerTitle: true,
         backgroundColor: Colors.grey,
+
+        //* title of screen
         title: Text(
           "Home Page",
           style: TextStyle(color: Colors.black),
         ),
+
+        //* Icon for log out
         actions: [
           IconButton(
             icon: Icon(
@@ -28,6 +33,7 @@ class HomePage extends StatelessWidget {
           ),
         ],
       ),
+      drawer: CustomDrawer(),
     );
   }
 }
