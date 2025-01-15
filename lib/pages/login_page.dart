@@ -1,19 +1,54 @@
 // ignore_for_file: prefer_const_constructors, prefer_const_literals_to_create_immutables
 
+import 'package:firebase_auth/firebase_auth.dart';
+import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:gap/gap.dart';
 import 'package:minimal_social/components/custom_button.dart';
 import 'package:minimal_social/components/custom_text_form_field.dart';
+import 'package:minimal_social/helper/helper_methods.dart';
 
-class LoginPage extends StatelessWidget {
+class LoginPage extends StatefulWidget {
   final void Function() onTap;
   LoginPage({
     required this.onTap,
     super.key,
   });
 
+  @override
+  State<LoginPage> createState() => _LoginPageState();
+}
+
+class _LoginPageState extends State<LoginPage> {
   final emailController = TextEditingController();
+
   final passwordController = TextEditingController();
+
+  //* login Method
+  void login() async {
+    //* Show Loading indicator
+    showDialog(
+        context: context,
+        builder: (context) {
+          return Center(
+            child: CircularProgressIndicator(),
+          );
+        });
+
+    //* Try sign in
+    try {
+      await FirebaseAuth.instance.signInWithEmailAndPassword(
+        email: emailController.text,
+        password: passwordController.text,
+      );
+
+      if (context.mounted) Navigator.pop(context);
+    } on FirebaseAuthException catch (e) {
+      Navigator.pop(context);
+      displayMessageToUser(e.code, context);
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -59,7 +94,7 @@ class LoginPage extends StatelessWidget {
                 mainAxisAlignment: MainAxisAlignment.end,
                 children: [
                   GestureDetector(
-                    onTap: onTap,
+                    onTap: widget.onTap,
                     child: Text(
                       "Forgot Password ?",
                       style: TextStyle(),
@@ -70,7 +105,7 @@ class LoginPage extends StatelessWidget {
               Gap(20),
               //* login button
               CustomButton(
-                onTap: onTap,
+                onTap: login,
                 text: "Login",
               ),
               Gap(15),
@@ -86,7 +121,7 @@ class LoginPage extends StatelessWidget {
                   ),
                   Gap(5),
                   GestureDetector(
-                    onTap: onTap,
+                    onTap: widget.onTap,
                     child: Text(
                       "Register Here",
                       style: TextStyle(
