@@ -1,14 +1,19 @@
+buildscript {
+    dependencies {
+        classpath 'com.google.gms:google-services:4.4.2' // Google Services Gradle Plugin
+    }
+}
+
 plugins {
     id "com.android.application"
     id "kotlin-android"
-    // The Flutter Gradle Plugin must be applied after the Android and Kotlin Gradle plugins.
-    id "dev.flutter.flutter-gradle-plugin"
+    id "dev.flutter.flutter-gradle-plugin" // Flutter Gradle Plugin
 }
 
 android {
-    namespace = "com.example.minimal_social"
-    compileSdk = flutter.compileSdkVersion
-    ndkVersion = flutter.ndkVersion
+    namespace = "com.example.minimal_social" // Replace with your app's package name
+    compileSdk = flutter.compileSdkVersion // Set compile SDK version from Flutter
+    ndkVersion = flutter.ndkVersion // Set NDK version from Flutter
 
     compileOptions {
         sourceCompatibility = JavaVersion.VERSION_1_8
@@ -20,14 +25,11 @@ android {
     }
 
     defaultConfig {
-        // TODO: Specify your own unique Application ID (https://developer.android.com/studio/build/application-id.html).
-        applicationId = "com.example.minimal_social"
-        // You can update the following values to match your application needs.
-        // For more information, see: https://flutter.dev/to/review-gradle-config.
-        minSdk = flutter.minSdkVersion
-        targetSdk = flutter.targetSdkVersion
-        versionCode = flutter.versionCode
-        versionName = flutter.versionName
+        applicationId = "com.example.minimal_social" // Replace with your app's package name
+        minSdk = 23 // Set minimum SDK version from Flutter
+        targetSdk = flutter.targetSdkVersion // Set target SDK version from Flutter
+        versionCode = flutter.versionCode // Set version code from Flutter
+        versionName = flutter.versionName // Set version name from Flutter
     }
 
     buildTypes {
@@ -40,5 +42,13 @@ android {
 }
 
 flutter {
-    source = "../.."
+    source = "../.." // Path to the Flutter source code
 }
+
+dependencies {
+    implementation platform('com.google.firebase:firebase-bom:33.7.0') // Firebase BoM
+    implementation 'com.google.firebase:firebase-analytics' // Firebase Analytics
+    // Add other Firebase dependencies as needed
+}
+
+apply plugin: 'com.google.gms.google-services' // Apply Google Services Plugin

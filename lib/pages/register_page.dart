@@ -1,11 +1,13 @@
 // ignore_for_file: prefer_const_constructors, prefer_const_literals_to_create_immutables
 
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:gap/gap.dart';
 import 'package:minimal_social/components/custom_button.dart';
 import 'package:minimal_social/components/custom_text_form_field.dart';
+import 'package:minimal_social/helper/helper_methods.dart';
 
-class RegisterPage extends StatelessWidget {
+class RegisterPage extends StatefulWidget {
   final void Function() onTap;
 
   RegisterPage({
@@ -13,10 +15,52 @@ class RegisterPage extends StatelessWidget {
     super.key,
   });
 
+  @override
+  State<RegisterPage> createState() => _RegisterPageState();
+}
+
+class _RegisterPageState extends State<RegisterPage> {
   final usernameController = TextEditingController();
   final emailController = TextEditingController();
   final passwordController = TextEditingController();
   final comfirmedPWController = TextEditingController();
+
+  //* register method
+  void registerUser() async {
+    //* show loading circle
+    showDialog(
+        context: context,
+        builder: (context) {
+          return Center(
+            child: CircularProgressIndicator(),
+          );
+        });
+    //* make sure password is match
+    if (passwordController.text != comfirmedPWController.text) {
+      //* pop loading indicator
+      Navigator.pop(context);
+
+      //* show error message
+      displayMessageToUser("Password is not match", context);
+    }
+
+    //* try creating the user
+    try {
+      UserCredential userCredential =
+          await FirebaseAuth.instance.createUserWithEmailAndPassword(
+        email: emailController.text,
+        password: passwordController.text,
+      );
+      Navigator.pop(context);
+    } on FirebaseAuthException catch (e) {
+      //* pop loading indicator
+      Navigator.pop(context);
+
+      //* show error message
+      displayMessageToUser(e.code, context);
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -79,7 +123,7 @@ class RegisterPage extends StatelessWidget {
                 Gap(20),
                 //* login button
                 CustomButton(
-                  onTap: onTap,
+                  onTap: registerUser,
                   text: "Register",
                 ),
                 Gap(15),
@@ -94,7 +138,7 @@ class RegisterPage extends StatelessWidget {
                     ),
                     Gap(5),
                     GestureDetector(
-                      onTap: onTap,
+                      onTap: widget.onTap,
                       child: Text(
                         "Login Here",
                         style: TextStyle(

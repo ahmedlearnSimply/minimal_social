@@ -86,9 +86,7 @@ class LoginPage extends StatelessWidget {
                   ),
                   Gap(5),
                   GestureDetector(
-                    onTap: () {
-                      // Navigate to forgot password page
-                    },
+                    onTap: onTap,
                     child: Text(
                       "Register Here",
                       style: TextStyle(
